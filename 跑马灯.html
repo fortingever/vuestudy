@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="UTF-8">
+	<meta name="viewport" content="width=device-width, initial-scale=1.0">
+	<meta http-equiv="X-UA-Compatible" content="ie=edge">
+	<title>Document</title>
+</head>
+<body>
+	<div id="app">
+		<button @click = "lang">浪起来</button>
+		<button @click = "langstop">停下</button>
+		<p v-text = "msg"></p>
+	</div>
+	<script src="./vue.js"></script>
+	<script>
+		var vm = new Vue({
+			el:"#app",
+			data:{
+				msg:"稳住,我们能赢!!!",
+				timerId:null
+			},
+			methods:{
+				lang:function(){
+					if(this.timerId){
+						return
+					}
+					this.timerId = setInterval(() => {
+						const first = this.msg.slice(0,1);
+						const last = this.msg.slice(1);
+
+						this.msg = last + first;
+					}, 500);
+				},
+				langstop:function(){
+					clearInterval(this.timerId);
+					
+				}
+			}
+		})
+	</script>
+</body>
+</html>
